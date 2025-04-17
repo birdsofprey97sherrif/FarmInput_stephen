@@ -1,0 +1,253 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  justify-content: center;
+}
+
+.FarmInput_img {
+  width: 100%;  /* Set a fixed width */
+  height: 400px; /* Set a fixed height */
+  object-fit: cover; /* Ensures images fit properly */
+  border-radius: 10px; /* Optional: Adds rounded corners */
+  border: 2px solid #ddd; /* Optional: Adds a border */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow */
+}
+
+
+.card {
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+h2.underline {
+  text-decoration: underline;
+  text-align: center;
+  color: #333;
+}
+
+button.btn-primary {
+  background-color: #007bff;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+button.btn-primary:hover {
+  background-color: #0056b3;
+}
+/* Style for labels */
+label {
+  font-weight: bold;
+  color: crimson; /* Blue color for labels */
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Style for placeholders */
+input::placeholder,
+textarea::placeholder {
+  color: #6c757d; /* Gray color for placeholders */
+  font-style: italic;
+  font-size: 13px;
+}
+.custom-category {
+  padding: 6px 12px;
+  background-color: pink; /* Green */
+  color: white;
+  font-weight: 600;
+  border-radius: 9999px; /* Fully rounded */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  display: inline-block;
+}
+
+.custom-category:hover {
+  background-color: purple; /* Darker green */
+  transform: scale(1.05);
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.img{
+  height: 200px;
+  width:100% ;
+}
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Gradient background for the form container */
+.form-container {
+    background: linear-gradient(135deg, whitesmoke, #6c757d); /* Blue to gray gradient */
+    color: white; /* Ensure text is readable */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Add hover effect to the form container */
+.form-container:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+    transform: scale(1.02) rotate(1deg); /* Slightly enlarge the form and rotate */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Example CSS for spacing below the fixed navbar */
+body {
+  padding-top: 56px; /* Adjust this value based on your navbar height */
+}
+.nav-link {
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.nav-link.admin {
+  font-weight: bold;
+  color: crimson;
+}
+
+.nav-link.admin:hover {
+  color: darkred;
+  text-decoration: underline;
+}
+
+.dropdown-menu {
+  background-color: #f8f9fa; /* Light gray */
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(-10px);
+  opacity: 0;
+}
+
+.dropdown-menu.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.dropdown-item:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(255, 0, 0, 0.7); /* Semi-transparent red */
+  border-radius: 50%;
+}
+
+.carousel-indicators button {
+  background-color: #007bff;
+}
+
+.carousel-indicators .active {
+  background-color: #ff0000;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+th, td {
+    padding: 12px 15px;
+}
+
+thead {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f3f3f3;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}

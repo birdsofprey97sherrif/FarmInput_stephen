@@ -1,0 +1,176 @@
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import CryptoJS from "crypto-js"; // Library for encrypting sensitive data
+
+const Login = () => {
+    // State variables for managing form inputs and UI states
+    const [email, setEmail] = useState(""); // Stores the user's email
+    const [password, setPassword] = useState(""); // Stores the user's password
+    const [rememberMe, setRememberMe] = useState(false); // Tracks if "Remember Me" is checked
+    const [loading, setLoading] = useState(false); // Tracks the loading state during form submission
+    const [error, setError] = useState(""); // Stores error messages
+    const [showPassword, setShowPassword] = useState(false); // Toggles password visibility
+    const navigate = useNavigate(); // React Router's navigation hook
+
+    // Redirect the user if they are already logged in
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("user") || sessionStorage.getItem("user"));
+        if (user) {
+            // Redirect based on the user's role
+            if (user.role === "admin") {
+                navigate("/admin-dashboard");
+            } else {
+                navigate("/");
+            }
+        }
+    }, [navigate]);
+
+    // Function to handle form submission
+    const submit = async (e) => {
+        e.preventDefault(); // Prevent default form submission behavior
+
+        setLoading(true); // Set loading state to true
+        setError(""); // Clear any previous errors
+
+        try {
+            const data = { email, password }; // Prepare the data to be sent to the API
+
+            // Send a POST request to the login API
+            const response = await axios.post(
+              "https://steviewonder.pythonanywhere.com/login", // Use environment variable for API URL
+                data,
+                {
+                    headers: {
+                        "Content-Type": "application/json", // Specify JSON content type
+                    },
+                }
+            );
+
+            // Check if the response indicates a successful login
+            if (response.data && response.data.status === "success") {
+                const { user, token } = response.data; // Extract user and token from the response
+
+                // Encrypt the token before storing it
+                const encryptedToken = CryptoJS.AES.encrypt(token, "your-secret-key").toString();
+
+                if (rememberMe) {
+                    localStorage.setItem("user", JSON.stringify(user));
+                    localStorage.setItem("token", encryptedToken);
+                } else {
+                    localStorage.setItem("user", JSON.stringify(user)); // Store in localStorage even if "Remember Me" is unchecked
+                    localStorage.setItem("token", encryptedToken);
+                }
+
+                alert(response.data.message); // Display a success message
+
+                // Redirect based on the user's role
+                if (user.role === "admin") {
+                    navigate("/admin-dashboard");
+                } else {
+                    navigate("/");
+                }
+            } else {
+                // Display an error message if login fails
+                setError(response.data.message || "Login failed. Please check your credentials and try again.");
+            }
+        } catch (error) {
+            console.error("Login error:", error); // Log the error for debugging
+            setError(error.response?.data?.message || "An error occurred. Please try again."); // Display a generic error message
+        } finally {
+            setLoading(false); // Reset the loading state
+        }
+    };
+
+    return (
+        <div className="row justify-content-center mt-4">
+            <div className="col-md-6 card shadow p-4 form-container">
+                <h2 className="underline">SIGN IN HERE</h2>
+                <hr />
+                {/* Show a loading spinner while the form is being submitted */}
+                {loading && (
+                    <div className="spinner-border text-primary" role="status" aria-live="polite">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+                )}
+                {/* Display error messages */}
+                {error && (
+                    <div className="alert alert-danger" role="alert" aria-live="assertive">
+                        {error}
+                    </div>
+                )}
+                <form onSubmit={submit}>
+                    {/* Email input field */}
+                    <label htmlFor="email" className="form-label">
+                        Enter Email
+                    </label>
+                    <input
+                        id="email"
+                        type="email"
+                        placeholder="email"
+                        className="form-control mb-3"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)} // Update email state on input change
+                        required
+                        aria-label="Email Address"
+                    />
+
+                    {/* Password input field */}
+                    <label htmlFor="password" className="form-label">
+                        Input Password
+                    </label>
+                    <input
+                        id="password"
+                        type={showPassword ? "text" : "password"} // Toggle password visibility
+                        placeholder="password"
+                        className="form-control mb-3"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)} // Update password state on input change
+                        required
+                        aria-label="Password"
+                    />
+
+                    {/* Checkbox to toggle password visibility */}
+                    <div className="form-check">
+                        <input
+                            type="checkbox"
+                            className="form-check-input"
+                            id="showPassword"
+                            checked={showPassword}
+                            onChange={(e) => setShowPassword(e.target.checked)} // Toggle showPassword state
+                        />
+                        <label className="form-check-label" htmlFor="showPassword">
+                            Show Password
+                        </label>
+                    </div>
+
+                    {/* Checkbox for "Remember Me" */}
+                    <div className="form-check mb-3">
+                        <input
+                            type="checkbox"
+                            className="form-check-input"
+                            id="rememberMe"
+                            checked={rememberMe}
+                            onChange={(e) => setRememberMe(e.target.checked)} // Toggle rememberMe state
+                        />
+                        <label className="form-check-label" htmlFor="rememberMe">
+                            Remember Me
+                        </label>
+                    </div>
+
+                    {/* Submit button */}
+                    <button type="submit" className="btn btn-primary w-50" disabled={loading}>
+                        {loading ? "Signing in..." : "Sign In"}
+                    </button>
+                </form>
+
+                {/* Link to the signup page */}
+                <p>
+                    Don't have an Account? <Link to="/signup">Signup</Link>
+                </p>
+            </div>
+        </div>
+    );
+};
+
+export default Login;
