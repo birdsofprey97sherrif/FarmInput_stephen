@@ -28,59 +28,54 @@ const Login = () => {
 
     // Function to handle form submission
     const submit = async (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
 
-        setLoading(true); // Set loading state to true
-        setError(""); // Clear any previous errors
+    setLoading(true);
+    setError("");
 
-        try {
-            const data = { email, password }; // Prepare the data to be sent to the API
+    try {
+        // Step 1: Use FormData to match Flask's request.form
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("password", password);
 
-            // Send a POST request to the login API
-            const response = await axios.post(
-              "https://steviewonder.pythonanywhere.com/login", // Use environment variable for API URL
-                data,
-                {
-                    headers: {
-                        "Content-Type": "application/json", // Specify JSON content type
-                    },
-                }
-            );
+        // Step 2: Send the form data without setting Content-Type
+        const response = await axios.post(
+            "https://steviewonder.pythonanywhere.com/login",
+            formData // Send as FormData
+            // No headers needed; browser sets them automatically
+        );
 
-            // Check if the response indicates a successful login
-            if (response.data && response.data.status === "success") {
-                const { user, token } = response.data; // Extract user and token from the response
+        // Step 3: Handle the response as before
+        if (response.data && response.data.status === "success") {
+            const { user, token } = response.data;
+            const encryptedToken = CryptoJS.AES.encrypt(token, "your-secret-key").toString();
 
-                // Encrypt the token before storing it
-                const encryptedToken = CryptoJS.AES.encrypt(token, "your-secret-key").toString();
-
-                if (rememberMe) {
-                    localStorage.setItem("user", JSON.stringify(user));
-                    localStorage.setItem("token", encryptedToken);
-                } else {
-                    localStorage.setItem("user", JSON.stringify(user)); // Store in localStorage even if "Remember Me" is unchecked
-                    localStorage.setItem("token", encryptedToken);
-                }
-
-                alert(response.data.message); // Display a success message
-
-                // Redirect based on the user's role
-                if (user.role === "admin") {
-                    navigate("/admin-dashboard");
-                } else {
-                    navigate("/");
-                }
+            if (rememberMe) {
+                localStorage.setItem("user", JSON.stringify(user));
+                localStorage.setItem("token", encryptedToken);
             } else {
-                // Display an error message if login fails
-                setError(response.data.message || "Login failed. Please check your credentials and try again.");
+                localStorage.setItem("user", JSON.stringify(user));
+                localStorage.setItem("token", encryptedToken);
             }
-        } catch (error) {
-            console.error("Login error:", error); // Log the error for debugging
-            setError(error.response?.data?.message || "An error occurred. Please try again."); // Display a generic error message
-        } finally {
-            setLoading(false); // Reset the loading state
+
+            alert(response.data.message);
+
+            if (user.role === "admin") {
+                navigate("/admin-dashboard");
+            } else {
+                navigate("/");
+            }
+        } else {
+            setError(response.data.message || "Login failed. Please check your credentials and try again.");
         }
-    };
+    } catch (error) {
+        console.error("Login error:", error);
+        setError(error.response?.data?.message || "An error occurred. Please try again.");
+    } finally {
+        setLoading(false);
+    }
+};
 
     return (
         <div className="row justify-content-center mt-4">
