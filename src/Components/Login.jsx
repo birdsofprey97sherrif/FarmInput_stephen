@@ -8,7 +8,7 @@ const Login = () => {
     const [email, setEmail] = useState(""); // Stores the user's email
     const [password, setPassword] = useState(""); // Stores the user's password
     const [rememberMe, setRememberMe] = useState(false); // Tracks if "Remember Me" is checked
-    const [loading, setLoading] = useState(false); // Tracks the loading state during form submission
+    const [loading, setLoading] = useState(""); // Tracks the loading state during form submission
     const [error, setError] = useState(""); // Stores error messages
     const [showPassword, setShowPassword] = useState(false); // Toggles password visibility
     const navigate = useNavigate(); // React Router's navigation hook
@@ -30,7 +30,7 @@ const Login = () => {
     const submit = async (e) => {
     e.preventDefault();
 
-    setLoading(true);
+    setLoading("please wait...as we log you in");
     setError("");
 
     try {
@@ -73,7 +73,7 @@ const Login = () => {
         console.error("Login error:", error);
         setError(error.response?.data?.message || "An error occurred. Please try again.");
     } finally {
-        setLoading(false);
+        setLoading("");
     }
 };
 
