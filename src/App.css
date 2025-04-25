@@ -93,7 +93,7 @@ textarea::placeholder {
 }
 .img{
   height: 200px;
-  width:100% ;
+  width:  25% ;
 }
 .App-link {
   color: #61dafb;
@@ -250,4 +250,139 @@ tbody tr:hover {
 
 .btn-danger:hover {
     background-color: #c82333;
+}
+.greeting-container {
+  margin-top: 60px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  position: relative;
+}
+
+.animate-grow {
+  animation: growUser 1.5s ease-in-out forwards;
+}
+
+@keyframes growUser {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scroll {
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  animation: scrollGreeting 10s linear infinite;
+}
+
+@keyframes scrollGreeting {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.animated-greeting {
+  position: relative;
+  padding-top: 1rem;
+  animation: fadeIn 1s ease-in;
+}
+
+.scroll-greeting {
+  display: inline-block;
+  animation: scrollIn 1s ease-out forwards;
+  white-space: nowrap;
+}
+
+.grow-username {
+  display: inline-block;
+  animation: growIn 1s ease-in-out;
+}
+
+@keyframes scrollIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes growIn {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #6c757d, #282c34);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  color: white;
+}
+
+.splash-content {
+  text-align: center;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.splash-logo {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+  animation: bounce 2s infinite;
+}
+
+.splash-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.splash-subtitle {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
