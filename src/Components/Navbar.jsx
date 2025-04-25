@@ -34,14 +34,13 @@ const Navbar = () => {
               <div className="w-100 d-flex justify-content-between align-items-center greeting-container px-3">
                 {/* Left side: Logged in as */}
                 <div className="username-message animate-grow">
-                  Logged in as <strong>{user.username}</strong>
+                  Logged in as <strong>{user?.username}</strong>
                 </div>
 
                 {/* Right side: Greeting message */}
                 <div className="greeting-message animate-scroll">
-                  {greeting}, {user.username}!
+                  {greeting}, {user?.username}!
                 </div>
-
               </div>
             )}
             <button
@@ -91,9 +90,8 @@ const Navbar = () => {
                         <br />
                         <span className="small">Product</span>
                       </NavLink>
-
                     </li>
-                    {user.user?.role === "admin" && (
+                    {user?.role === "admin" && (
                       <li className="nav-item">
                         <NavLink className="nav-link admin" to="/admin-dashboard">
                           Admin Dashboard
@@ -124,8 +122,15 @@ const Navbar = () => {
                           <button
                             className="dropdown-item"
                             onClick={() => {
-                              localStorage.removeItem("user");
+                              // Clear all user-related data
+                              localStorage.clear();
+                              sessionStorage.clear();
+
+                              // Navigate to the login page
                               navigate("/login");
+
+                              // Optionally reload the page to ensure a clean state
+                              window.location.reload();
                             }}
                           >
                             Logout
