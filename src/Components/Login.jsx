@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import CryptoJS from "crypto-js"; // Library for encrypting sensitive data
+import { useLocation } from "react-router-dom";
 
 const Login = () => {
     // State variables for managing form inputs and UI states
@@ -11,6 +12,18 @@ const Login = () => {
     const [loading, setLoading] = useState(""); // Tracks the loading state during form submission
     const [error, setError] = useState(""); // Stores error messages
     const [showPassword, setShowPassword] = useState(false); // Toggles password visibility
+    const location = useLocation();
+    
+    // Detect login and show animation
+    useEffect(() => {
+        if (location.state?.justLoggedIn) {
+            const timer = setTimeout(() => {
+                // Remove animation after a few seconds
+            }, 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [location.state]);
+
     const navigate = useNavigate(); // React Router's navigation hook
 
     // Redirect the user if they are already logged in
@@ -19,63 +32,65 @@ const Login = () => {
         if (user) {
             // Redirect based on the user's role
             if (user.role === "admin") {
-                navigate("/admin-dashboard");
+                navigate("/admin-dashboard", { state: { justLoggedIn: true } });
             } else {
-                navigate("/");
+                navigate("/", { state: { justLoggedIn: true } });
             }
+
         }
     }, [navigate]);
 
     // Function to handle form submission
     const submit = async (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    setLoading("please wait...as we log you in");
-    setError("");
+        setLoading("pleasewait...as we log you in");
+        setError("");
 
-    try {
-        // Step 1: Use FormData to match Flask's request.form
-        const formData = new FormData();
-        formData.append("email", email);
-        formData.append("password", password);
+        try {
+            // Step 1: Use FormData to match Flask's request.form
+            const formData = new FormData();
+            formData.append("email", email);
+            formData.append("password", password);
 
-        // Step 2: Send the form data without setting Content-Type
-        const response = await axios.post(
-            "https://steviewonder.pythonanywhere.com/login",
-            formData // Send as FormData
-            // No headers needed; browser sets them automatically
-        );
+            // Step 2: Send the form data without setting Content-Type
+            const response = await axios.post(
+                "https://steviewonder.pythonanywhere.com/login",
+                formData // Send as FormData
+                // No headers needed; browser sets them automatically
+            );
 
-        // Step 3: Handle the response as before
-        if (response.data && response.data.status === "success") {
-            const { user, token } = response.data;
-            const encryptedToken = CryptoJS.AES.encrypt(token, "your-secret-key").toString();
+            // Step 3: Handle the response as before
+            if (response.data && response.data.status === "success") {
+                const { user, token } = response.data;
+                const encryptedToken = CryptoJS.AES.encrypt(token, "your-secret-key").toString();
 
-            if (rememberMe) {
-                localStorage.setItem("user", JSON.stringify(user));
-                localStorage.setItem("token", encryptedToken);
+                if (rememberMe) {
+                    localStorage.setItem("user", JSON.stringify(user));
+                    localStorage.setItem("token", encryptedToken);
+                } else {
+                    localStorage.setItem("user", JSON.stringify(user));
+                    localStorage.setItem("token", encryptedToken);
+                }
+
+                alert(response.data.message);
+
+                if (user.role === "admin") {
+                    navigate("/admin-dashboard");
+                } else {
+                    navigate("/");
+                }
             } else {
-                localStorage.setItem("user", JSON.stringify(user));
-                localStorage.setItem("token", encryptedToken);
+                setError(response.data.message || "Login failed. Please check your credentials and try again.");
             }
-
-            alert(response.data.message);
-
-            if (user.role === "admin") {
-                navigate("/admin-dashboard");
-            } else {
-                navigate("/");
-            }
-        } else {
-            setError(response.data.message || "Login failed. Please check your credentials and try again.");
+        } catch (error) {
+            console.error("Login error:", error);
+            setError(error.response?.data?.message || "An error occurred. Please try again.");
+        } finally {
+            setLoading("");
         }
-    } catch (error) {
-        console.error("Login error:", error);
-        setError(error.response?.data?.message || "An error occurred. Please try again.");
-    } finally {
-        setLoading("");
-    }
-};
+    };
+
 
     return (
         <div className="row justify-content-center mt-4">
