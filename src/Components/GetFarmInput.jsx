@@ -66,11 +66,6 @@ const GetFarmInput = () => {
             {/* Carousel Component */}
             <Carousel />
 
-            {/* Page Header */}
-            <header className="App-header">
-                <h1>Buy and Sell Quality Farm Inputs Online</h1>
-            </header>
-
             {/* Section Title */}
             <h2 className="underline mt-2">AVAILABLE FARM INPUTS</h2>
             <hr />
