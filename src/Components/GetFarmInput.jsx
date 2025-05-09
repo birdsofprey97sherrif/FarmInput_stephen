@@ -86,32 +86,28 @@ const GetFarmInput = () => {
             {/* Display Farm Inputs */}
             {filteredFarmInput?.map((FarmInput) => (
                 <div
-                    className="col-md-3 justify-content-center mb-4 card shadow p-4"
+                    className="col-md-3 justify-content-center card shadow p-2"
                     key={FarmInput.id}
                 >
                     {/* Card Header */}
                     <div className="card-header card-shadow p-2 mb-2">
                         <h4>{FarmInput.FarmInput_name}</h4>
                     </div>
-                    <br />
-                    <br />
-                    
-
                     {/* Farm Input Category */}
-                    <span className="custom-category mt-2">{FarmInput.FarmInput_category}</span>
+                    <span className="custom-category">{FarmInput.FarmInput_category}</span>
 
                     {/* Image and Details */}
-                    <div className="image-container card-body mt-2">
+                    <div className="image-container card-body p-2">
                         <img
                             src={image_url + FarmInput.FarmInput_image}
                             alt="FarmInput"
                             className="FarmInput_img"
                         />
-                        <p className="text-muted">
-                            {FarmInput.FarmInput_description.slice(0, 20)}...
+                        <p className="text-muted p-2">
+                            {FarmInput.FarmInput_description}
                         </p>
                         <br />
-                        <b className="text-warning text-center">Ksh {FarmInput.FarmInput_price}</b>
+                        <b className="text-warning text-center mt-2">Ksh {FarmInput.FarmInput_price}</b>
                         <br />
 
                         {/* Buy Now Button */}
@@ -121,7 +117,7 @@ const GetFarmInput = () => {
                             }
                             className="btn btn-success mt-2 w-100"
                         >
-                            BUY NOW
+                            Purchase NOW
                         </button>
                     </div>
                 </div>
