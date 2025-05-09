@@ -92,7 +92,7 @@ textarea::placeholder {
   color: white;
 }
 .img{
-  height: 200px;
+  height: 50px;
   width:  25% ;
 }
 .App-link {
@@ -366,6 +366,15 @@ tbody tr:hover {
 .splash-subtitle {
   font-size: 1.2rem;
   font-style: italic;
+}
+.section-header{
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-aling: right;
+  text-decoration: underline;
+  color: crimson;
+  padding: 5px 10px;
 }
 
 /* Animations */
