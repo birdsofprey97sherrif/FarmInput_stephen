@@ -67,7 +67,7 @@ const GetFarmInput = () => {
             <Carousel />
 
             {/* Section Title */}
-            <h2 className="underline mt-2">AVAILABLE FARM INPUTS</h2>
+            <h2 className="section-header mt-2">AVAILABLE FARM INPUTS</h2>
             <hr />
 
             {/* Search Input */}
