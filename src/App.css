@@ -21,7 +21,7 @@
 
 .FarmInput_img {
   width: 100%;  /* Set a fixed width */
-  height: 50px; /* Set a fixed height */
+  height: 200px; /* Set a fixed height */
   object-fit: cover; /* Ensures images fit properly */
   border-radius: 10px; /* Optional: Adds rounded corners */
   border: 2px solid #ddd; /* Optional: Adds a border */
@@ -368,13 +368,12 @@ tbody tr:hover {
   font-style: italic;
 }
 .section-header{
-  font-style: italic;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-aling: start;
+  font-size: 0.8rem;        /* small font size */
+  font-weight: bold;        /* bold text */
+  text-align: left;         /* align to left */
   text-decoration: underline;
-  color: blue;
-  padding: 5px 10px;
+  color: crimson;           /* crimson color */
+  display: block;  
 }
 
 /* Animations */
