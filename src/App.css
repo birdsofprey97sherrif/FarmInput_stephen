@@ -356,7 +356,7 @@ tbody tr:hover {
 .section-header{
   font-size: 0.8rem;        /* small font size */
   font-weight: bold;        /* bold text */
-  text-align: left; ! important    /* align to left */
+  text-align: left ! important;    /* align to left */
   text-decoration: underline;
   color: crimson;           /* crimson color */
   font-style: italic;
