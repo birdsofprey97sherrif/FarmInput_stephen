@@ -6,50 +6,47 @@ import Carousel from "./Carousel";
 import Footer from "./Footer";
 
 const GetFarmInput = () => {
-    const [FarmInputs, setFarmInput] = useState([]);
-    const [filteredFarmInput, setFilteredFarmInput] = useState([]);
+    const [farmInputs, setFarmInputs] = useState([]);
+    const [filteredFarmInputs, setFilteredFarmInputs] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
-    const [loading, setLoading] = useState("");
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
     const image_url = "https://steviewonder.pythonanywhere.com/static/images/";
 
-   const [loading, setLoading] = useState(false);
-
-const getFarmInputs = async () => {
-    setLoading(true);
-    setError("");
-    try {
-        const response = await axios.get("https://steviewonder.pythonanywhere.com/get_FarmInputs");
-        if (Array.isArray(response.data)) {
-            setFarmInput(response.data);
-        } else if (Array.isArray(response.data.message)) {
-            setFarmInput(response.data.message);
-        } else {
-            setFarmInput([]);
+    const getFarmInputs = async () => {
+        setLoading(true);
+        setError("");
+        try {
+            const response = await axios.get("https://steviewonder.pythonanywhere.com/get_FarmInputs");
+            if (Array.isArray(response.data)) {
+                setFarmInputs(response.data);
+            } else if (Array.isArray(response.data.message)) {
+                setFarmInputs(response.data.message);
+            } else {
+                setFarmInputs([]);
+            }
+        } catch (err) {
+            console.error("Error fetching farm inputs:", err.response || err.message || err);
+            setError("Failed to fetch farm inputs. Please try again later.");
+        } finally {
+            setLoading(false);
         }
-    } catch (error) {
-        setError("Failed to fetch farm inputs. Please try again later.");
-        console.error("Error fetching farm inputs:", error.response || error.message || error);
-    } finally {
-        setLoading(false);
-    }
-};
+    };
 
     useEffect(() => {
         getFarmInputs();
     }, []);
 
     useEffect(() => {
-        if (!FarmInputs) return;
-        const filtered = FarmInputs.filter((FarmInput) =>
-            FarmInput.FarmInput_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            FarmInput.FarmInput_description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            FarmInput.FarmInput_category.toLowerCase().includes(searchQuery.toLowerCase())
+        const filtered = farmInputs.filter((input) =>
+            input.FarmInput_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            input.FarmInput_description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            input.FarmInput_category.toLowerCase().includes(searchQuery.toLowerCase())
         );
-        setFilteredFarmInput(filtered);
-    }, [searchQuery, FarmInputs]);
+        setFilteredFarmInputs(filtered);
+    }, [searchQuery, farmInputs]);
 
     return (
         <div className="get-farm-input-container">
@@ -69,31 +66,27 @@ const getFarmInputs = async () => {
                 />
                 <i className="search-icon fas fa-search"></i>
             </div>
-            {loading && <p className="loading-message">{loading}</p>
+
+            {loading && <p className="loading-message">Loading farm inputs...</p>}
             {error && <p className="error-message">{error}</p>}
 
             <div className="farm-input-grid">
-                {filteredFarmInput?.map((FarmInput) => (
-                    <div className="farm-input-card" key={FarmInput.id}>
+                {filteredFarmInputs.map((input) => (
+                    <div className="farm-input-card" key={input.id}>
                         <div className="card-header">
-                            <h4>{FarmInput.FarmInput_name}</h4>
+                            <h4>{input.FarmInput_name}</h4>
                         </div>
-                        <span className="custom-category">{FarmInput.FarmInput_category}</span>
+                        <span className="custom-category">{input.FarmInput_category}</span>
                         <div className="card-body">
                             <img
-                                  src={image_url + FarmInput.FarmInput_image}
-                                  alt={FarmInput.FarmInput_name}
-                                  className="farm-input-image"
-                                />
-
-                            <p className="farm-input-description">
-                                {FarmInput.FarmInput_description}
-                            </p>
-                            <b className="farm-input-price">Ksh {FarmInput.FarmInput_price}</b>
+                                src={image_url + input.FarmInput_image}
+                                alt={input.FarmInput_name}
+                                className="farm-input-image"
+                            />
+                            <p className="farm-input-description">{input.FarmInput_description}</p>
+                            <b className="farm-input-price">Ksh {input.FarmInput_price}</b>
                             <button
-                                onClick={() =>
-                                    navigate("/makepayment", { state: { FarmInput } })
-                                }
+                                onClick={() => navigate("/makepayment", { state: { FarmInput: input } })}
                                 className="buy-now-button"
                             >
                                 Purchase NOW
