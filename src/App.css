@@ -353,18 +353,21 @@ tbody tr:hover {
   font-size: 1.2rem;
   font-style: italic;
 }
-.section-header{
-  font-size: 0.8rem;        /* small font size */
-  font-weight: bold;        /* bold text */
-  text-align: left ! important;    /* align to left */
+.section-header {
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-align: left !important; /* <-- override parent */
   text-decoration: underline;
-  color: crimson;           /* crimson color */
+  color: crimson;
   font-style: italic;
   text-transform: uppercase;
   letter-spacing: 2px;
   border-bottom: 2px solid #007bff;
   display: block;
+  width: 100%; /* optional, for block alignment */
+  margin-left: 0; /* prevent auto-centering */
 }
+
 
 /* Animations */
 @keyframes fadeIn {
