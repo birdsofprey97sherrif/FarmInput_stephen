@@ -69,7 +69,9 @@ const getFarmInputs = async () => {
                 />
                 <i className="search-icon fas fa-search"></i>
             </div>
-
+            {!loading && filteredFarmInput.length === 0 && (
+              <p className="no-results-message">No farm inputs found for your search.</p>
+                )}
             {loading && <p className="loading-message">{loading}</p>}
             {error && <p className="error-message">{error}</p>}
 
