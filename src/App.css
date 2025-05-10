@@ -12,12 +12,6 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-.image-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1px;
-  justify-content: center;
-}
 .card {
   border-radius: 2px;
   background-color: #f9f9f9;
@@ -366,12 +360,10 @@ tbody tr:hover {
   text-decoration: underline;
   color: crimson;           /* crimson color */
   font-style: italic;
-  margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
   border-bottom: 2px solid #007bff;
   display: block;
-  padding-bottom: 5px;
 }
 
 /* Animations */
@@ -400,13 +392,13 @@ tbody tr:hover {
 /* Search Bar */
 .search-bar-container {
     position: relative;
-    margin: 20px auto;
+    margin: 5px auto;
     max-width: 500px;
 }
 
 .search-bar {
     width: 100%;
-    padding: 10px 40px 10px 15px;
+    padding: 1px 10px 1px 5px;
     border: 1px solid #ddd;
     border-radius: 25px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
