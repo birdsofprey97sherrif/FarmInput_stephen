@@ -42,15 +42,12 @@ const Footer = () => {
             Follow us on our social media platforms to stay updated:
           </p>
           <div className="d-flex justify-content-center">
-            <a href="https://facebook.com" className="text-white mx-2">
+          <img src="images/fb.png" alt="" className="text-white mx-2 img" />
               <i className="fab fa-facebook fa-2x"></i>
-            </a>
-            <a href="https://twitter.com" className="text-white mx-2">
+              <img src="images/twitter.jpg" alt="" className="text-white mx-2 img" />
               <i className="fab fa-twitter fa-2x"></i>
-            </a>
-            <a href="https://instagram.com" className="text-white mx-2">
+              <img src="images/instagram.jpg" alt="" className="text-white mx-2 img" />
               <i className="fab fa-instagram fa-2x"></i>
-            </a>
           </div>
         </div>
       </section>
