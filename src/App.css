@@ -18,17 +18,6 @@
   gap: 1px;
   justify-content: center;
 }
-
-.FarmInput_img {
-  width: 100%;  /* Set a fixed width */
-  height: 150px; /* Set a fixed height */
-  object-fit: cover; /* Ensures images fit properly */
-  border-radius: 10px; /* Optional: Adds rounded corners */
-  border: 2px solid #ddd; /* Optional: Adds a border */
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow */
-}
-
-
 .card {
   border-radius: 2px;
   background-color: #f9f9f9;
