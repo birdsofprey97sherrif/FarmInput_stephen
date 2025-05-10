@@ -483,12 +483,14 @@ tbody tr:hover {
 }
 
 .farm-input-image {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 10px;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
+
 
 .farm-input-description {
     font-size: 0.9rem;
