@@ -356,18 +356,15 @@ tbody tr:hover {
 .section-header {
   font-size: 0.8rem;
   font-weight: bold;
-  text-align: left !important; /* <-- override parent */
-  text-decoration: underline;
+  text-align: left;
+  text-decoration: overline; /* overline instead of underline */
   color: crimson;
   font-style: italic;
   text-transform: uppercase;
   letter-spacing: 2px;
   border-bottom: 2px solid #007bff;
   display: block;
-  width: 100%; /* optional, for block alignment */
-  margin-left: 0; /* prevent auto-centering */
 }
-
 
 /* Animations */
 @keyframes fadeIn {
