@@ -83,6 +83,8 @@ h2.underline {
   letter-spacing: 2px;
   border-bottom: 2px solid #007bff;
   display: block;
+  margin-top: 5px;
+  padding: 2px auto;
 }
 
 /* Buttons */
@@ -329,14 +331,14 @@ tbody tr:hover {
 }
 .search-bar-container {
   position: relative;
-  margin: 5px auto;
+  margin: 2px auto;
   max-width: 500px;
 }
 .search-bar {
   width: 100%;
   padding: 1px 10px 1px 5px;
   border: 1px solid #ddd;
-  border-radius: 25px;
+  border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   font-size: 1rem;
 }
