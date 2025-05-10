@@ -520,3 +520,10 @@ tbody tr:hover {
 .buy-now-button:hover {
     background: #218838;
 }
+.no-results-message {
+  text-align: center;
+  color: #999;
+  font-size: 1.1rem;
+  margin-top: 20px;
+}
+
