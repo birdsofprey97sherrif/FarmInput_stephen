@@ -72,7 +72,6 @@ const getFarmInputs = async () => {
             {!loading && filteredFarmInput.length === 0 && (
               <p className="no-results-message">No farm inputs found for your search.</p>
                 )}
-            {loading && <p className="loading-message">{loading}</p>}
             {error && <p className="error-message">{error}</p>}
 
             <div className="farm-input-grid">
