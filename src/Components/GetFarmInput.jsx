@@ -82,10 +82,11 @@ const getFarmInputs = async () => {
                         <span className="custom-category">{FarmInput.FarmInput_category}</span>
                         <div className="card-body">
                             <img
-                                src={image_url + FarmInput.FarmInput_image}
-                                alt="FarmInput"
-                                className="farm-input-image"
-                            />
+                                  src={image_url + FarmInput.FarmInput_image}
+                                  alt={FarmInput.FarmInput_name}
+                                  className="farm-input-image"
+                                />
+
                             <p className="farm-input-description">
                                 {FarmInput.FarmInput_description}
                             </p>
