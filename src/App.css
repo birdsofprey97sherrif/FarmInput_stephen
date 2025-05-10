@@ -21,7 +21,7 @@
 
 .FarmInput_img {
   width: 100%;  /* Set a fixed width */
-  height: 400px; /* Set a fixed height */
+  height: 150px; /* Set a fixed height */
   object-fit: cover; /* Ensures images fit properly */
   border-radius: 10px; /* Optional: Adds rounded corners */
   border: 2px solid #ddd; /* Optional: Adds a border */
@@ -30,7 +30,7 @@
 
 
 .card {
-  border-radius: 10px;
+  border-radius: 2px;
   background-color: #f9f9f9;
 }
 
