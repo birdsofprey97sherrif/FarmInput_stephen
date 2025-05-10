@@ -6,7 +6,7 @@ const SplashScreen = () => {
     <div className="splash-screen flex items-center justify-center h-screen bg-gradient-to-br from-blue-500 to-purple-600">
       <div className="splash-content text-center animate-fadeIn">
         <img
-          src="images/logo1.png" // Replace with your logo path
+          src="public/logo1.png" // Replace with your logo path
           alt="App Logo"
           className="splash-logo w-32 h-32 mx-auto mb-6"
         />
