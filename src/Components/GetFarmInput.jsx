@@ -56,7 +56,7 @@ const GetFarmInput = () => {
             <Navbar />
             <Carousel />
 
-            <h2 className="section-header mt-2">AVAILABLE FARM INPUTS</h2>
+            <h2 className="section-header">AVAILABLE FARM INPUTS</h2>
             <hr />
 
             <div className="search-bar-container">
