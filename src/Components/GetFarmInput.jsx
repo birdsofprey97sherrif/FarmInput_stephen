@@ -15,27 +15,27 @@ const GetFarmInput = () => {
 
     const image_url = "https://steviewonder.pythonanywhere.com/static/images/";
 
-    const getFarmInputs = async () => {
-        setLoading("Please wait... as we fetch your Farm Inputs");
-        try {
-            const response = await axios.get(
-                "https://steviewonder.pythonanywhere.com/get_FarmInputs"
-            );
-            setLoading("");
+   const [loading, setLoading] = useState(false);
 
-            if (Array.isArray(response.data)) {
-                setFarmInput(response.data);
-            } else if (Array.isArray(response.data.message)) {
-                setFarmInput(response.data.message);
-            } else {
-                setFarmInput([]);
-            }
-        } catch (error) {
-            setLoading("");
-            setError("Failed to fetch farm inputs. Please try again later.");
-            console.error("Error fetching farm inputs:", error.response || error.message || error);
+const getFarmInputs = async () => {
+    setLoading(true);
+    setError("");
+    try {
+        const response = await axios.get("https://steviewonder.pythonanywhere.com/get_FarmInputs");
+        if (Array.isArray(response.data)) {
+            setFarmInput(response.data);
+        } else if (Array.isArray(response.data.message)) {
+            setFarmInput(response.data.message);
+        } else {
+            setFarmInput([]);
         }
-    };
+    } catch (error) {
+        setError("Failed to fetch farm inputs. Please try again later.");
+        console.error("Error fetching farm inputs:", error.response || error.message || error);
+    } finally {
+        setLoading(false);
+    }
+};
 
     useEffect(() => {
         getFarmInputs();
