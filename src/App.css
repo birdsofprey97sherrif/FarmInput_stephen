@@ -405,3 +405,24 @@ tbody tr:hover {
   align-items: center;
   z-index: 1000;
 }
+.marquee {
+  width: 100%; /* Adjusts the width of the marquee container */
+  overflow: hidden; /* Hides anything that overflows the container */
+  position: relative; /* Enables positioning of child elements */
+}
+
+.marquee span {
+  display: inline-block; /* Makes the content inline but still allows styling */
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  animation: scroll-left 10s linear infinite; /* Creates a scrolling effect */
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%); /* Starts off-screen to the right */
+  }
+  100% {
+    transform: translateX(-100%); /* Ends off-screen to the left */
+  }
+}
+
