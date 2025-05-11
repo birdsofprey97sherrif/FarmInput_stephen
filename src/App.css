@@ -406,17 +406,20 @@ tbody tr:hover {
   z-index: 1000;
 }
 .marquee {
-  width: 100%; /* Adjusts the width of the marquee container */
-  overflow: hidden; /* Hides anything that overflows the container */
-  position: relative; /* Enables positioning of child elements */
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background-color: #343a40;
+  padding: 5px 0;
+  color: #fff;
 }
-
 .marquee span {
-  display: inline-block; /* Makes the content inline but still allows styling */
-  white-space: nowrap; /* Prevents text from wrapping to the next line */
-  animation: scroll-left 10s linear infinite; /* Creates a scrolling effect */
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll-left 15s linear infinite;
+  font-weight: bold;
+  font-size: 1rem;
 }
-
 @keyframes scroll-left {
   0% {
     transform: translateX(100%); /* Starts off-screen to the right */
