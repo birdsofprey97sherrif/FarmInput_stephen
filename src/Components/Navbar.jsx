@@ -144,6 +144,16 @@ const Navbar = () => {
             </div>
           </div>
         </nav>
+        <div className="text-center mt-4">
+            <h5 className="fw-bold">Explore Our Smart Navigation</h5>
+            <img
+              src="/images/navbar-demo.png"
+              alt="AgriGear Navbar Demo"
+              className="img-fluid shadow rounded"
+              style={{ maxWidth: '900px' }}
+            />
+        </div>
+
       </div>
     </section>
   );
