@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div>
-      <section className="row text-white bg-secondary p-4 mt-4">
+      <section className="row text-white bg-secondary p-4 mt-3">
         <div className="col-md-4 mb-3">
           <h4 className="text-center">About Us</h4>
           <p>
@@ -51,7 +51,7 @@ const Footer = () => {
           </div>
         </div>
       </section>
-      <footer className="text-white bg-dark text-center p-2 mt-3">
+      <footer className="text-white bg-dark text-center p-2 mt-2">
           <div className="marquee">
             <span>
               Welcome to Alpha AgriGear! Enjoy the best farm inputs at affordable prices. Contact us for more details!
