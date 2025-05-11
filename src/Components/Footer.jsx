@@ -54,7 +54,7 @@ const Footer = () => {
 
       <footer className="text-white bg-dark text-center p-2">
         <div className="marquee">
-          Welcome to Alpha Agro Store! Enjoy the best farm inputs at affordable prices. Contact us for more details!
+          Welcome to Alpha AgriGear! Enjoy the best farm inputs at affordable prices. Contact us for more details!
         </div>
         <h4>Developed by Githinji Stephen.&copy; 2025. All Rights Reserved</h4>
         <div className="text-center mt-3">
