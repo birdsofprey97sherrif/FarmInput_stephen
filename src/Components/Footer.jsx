@@ -51,7 +51,7 @@ const Footer = () => {
           </div>
         </div>
       </section>
-      <footer className="text-white bg-dark text-center p-2">
+      <footer className="text-white bg-dark text-center p-2 mt-2">
           <div className="marquee">
             <span>
               Welcome to Alpha AgriGear! Enjoy the best farm inputs at affordable prices. Contact us for more details!
