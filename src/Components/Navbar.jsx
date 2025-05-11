@@ -26,8 +26,8 @@ const Navbar = () => {
       <div className="col-md-12">
         <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
           <div className="container-fluid">
-            <NavLink className="navbar-brand fw-bold text-success" to="/">
-              Alpha Agro Stores
+            <NavLink className="navbar-brand fw-bold text-info" to="/">
+              Alpha AgriGear
             </NavLink>
 
             {user && (
