@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="col-md-4 mb-3">
           <h4 className="text-center">About Us</h4>
           <p>
-            Alpha Agro Store is an online shop to sell the best farm inputs products at very affordable prices. We are a dedicated company with over 30 years of quality services and top-notch customer care responses.
+            Welcome at ALPHA AGRIGEAR, we are dedicated to providing farmers with high-quality farm inputs and machinery that make agricultural operations more efficient and productive. Our online platform offers a wide range of products, from seeds, fertilizers, and pesticides to cutting-edge machinery designed to meet the needs of modern farming. With a commitment to sustainability and innovation, we ensure that our customers have access to the best tools and resources available. Whether you’re a smallholder or a large-scale commercial farm, our goal is to empower you with the right solutions to grow and succeed. We believe in making farming easier and more profitable, one product at a time.
           </p>
         </div>
         <div className="col-md-4">
