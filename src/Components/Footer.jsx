@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div>
-      <section className="row text-white bg-secondary p-4">
+      <section className="row text-white bg-secondary p-4 mt-4">
         <div className="col-md-4 mb-3">
           <h4 className="text-center">About Us</h4>
           <p>
@@ -51,12 +51,13 @@ const Footer = () => {
           </div>
         </div>
       </section>
-
       <footer className="text-white bg-dark text-center p-2">
-        <div className="marquee">
-          Welcome to Alpha AgriGear! Enjoy the best farm inputs at affordable prices. Contact us for more details!
-        </div>
-        <h4>Developed by Githinji Stephen.&copy; 2025. All Rights Reserved</h4>
+          <div className="marquee">
+            <span>
+              Welcome to Alpha AgriGear! Enjoy the best farm inputs at affordable prices. Contact us for more details!
+            </span>
+          </div>
+          <h4>Developed by Githinji Stephen.&copy; 2025. All Rights Reserved.</h4>
         <div className="text-center mt-3">
           <button
             className="btn btn-outline-light"
