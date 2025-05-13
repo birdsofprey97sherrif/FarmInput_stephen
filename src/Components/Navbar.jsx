@@ -2,34 +2,47 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  const [user, setUser] = useState(null); // State to store user data
+  const [user, setUser] = useState(null);
+  const [greeting, setGreeting] = useState('');
   const navigate = useNavigate();
+
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good morning";
+    if (hour < 18) return "Good afternoon";
+    return "Good evening";
+  };
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
-    setUser(storedUser); // Set user data from localStorage
-  }, []); // Run only once when the component mounts
-
-  useEffect(() => {
-    const handleResize = () => {
-      console.log("Window resized");
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize); // Cleanup
-    };
+    setUser(storedUser);
+    if (storedUser) {
+      setGreeting(getGreeting());
+    }
   }, []);
 
   return (
     <section className="row">
       <div className="col-md-12">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
           <div className="container-fluid">
-            <NavLink className="navbar-brand" to="/">
+            <NavLink className="navbar-brand fw-bold text-info" to="/">
               Alpha AgriGear
             </NavLink>
+
+            {user && (
+              <div className="w-100 d-flex justify-content-between align-items-center greeting-container px-3">
+                {/* Left side: Logged in as */}
+                <div className="username-message animate-grow">
+                  Logged in as <strong>{user?.username}</strong>
+                </div>
+
+                {/* Right side: Greeting message */}
+                <div className="greeting-message animate-scroll">
+                  {greeting}, {user?.username}!
+                </div>
+              </div>
+            )}
             <button
               className="navbar-toggler"
               type="button"
@@ -41,9 +54,9 @@ const Navbar = () => {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
+
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ms-auto">
-                {/* Home Link */}
                 <li className="nav-item">
                   <NavLink
                     className={({ isActive }) =>
@@ -54,9 +67,9 @@ const Navbar = () => {
                     Home
                   </NavLink>
                 </li>
+
                 {!user ? (
                   <>
-                    {/* Links for unauthenticated users */}
                     <li className="nav-item">
                       <NavLink className="nav-link" to="/signup">
                         Signup
@@ -70,13 +83,15 @@ const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    {/* Links for authenticated users */}
                     <li className="nav-item">
-                      <NavLink className="nav-link" to="/uploadFarmInput">
-                        <i className="fas fa-upload"></i> Upload Farm Input
+                      <NavLink className="nav-link text-center" to="/uploadFarmInput">
+                        <i className="fas fa-upload d-block"></i>
+                        <span className="fw-bold">Upload</span>
+                        <br />
+                        <span className="small">Product</span>
                       </NavLink>
                     </li>
-                    {user && user.role === "admin" && (
+                    {user?.role === "admin" && (
                       <li className="nav-item">
                         <NavLink className="nav-link admin" to="/admin-dashboard">
                           Admin Dashboard
@@ -107,8 +122,15 @@ const Navbar = () => {
                           <button
                             className="dropdown-item"
                             onClick={() => {
-                              localStorage.removeItem("user");
+                              // Clear all user-related data
+                              localStorage.clear();
+                              sessionStorage.clear();
+
+                              // Navigate to the login page
                               navigate("/login");
+
+                              // Optionally reload the page to ensure a clean state
+                              window.location.reload();
                             }}
                           >
                             Logout
