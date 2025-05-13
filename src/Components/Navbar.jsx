@@ -24,7 +24,7 @@ const Navbar = () => {
   return (
     <section className="row">
       <div className="col-md-12">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm bg-warning">
           <div className="container-fluid">
             <NavLink className="navbar-brand fw-bold text-info" to="/">
               Alpha AgriGear
