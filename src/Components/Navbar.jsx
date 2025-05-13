@@ -8,9 +8,9 @@ const Navbar = () => {
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return "Good morning";
-    if (hour < 18) return "Good afternoon";
-    return "Good evening";
+    if (hour < 12) return "🌅 Good morning";
+    if (hour < 18) return "☀️ Good afternoon";
+    return "🌙 Good evening";
   };
 
   useEffect(() => {
@@ -21,131 +21,130 @@ const Navbar = () => {
     }
   }, []);
 
+  const handleLogout = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    navigate("/login");
+    window.location.reload();
+  };
+
   return (
-    <section className="row">
-      <div className="col-md-12">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
-          <div className="container-fluid">
-            <NavLink className="navbar-brand fw-bold text-info" to="/">
-              Alpha AgriGear
-            </NavLink>
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top px-3">
+      <div className="container-fluid">
+        <NavLink className="navbar-brand d-flex align-items-center" to="/">
+          <img src="/logo.png" alt="Logo" height="40" className="me-2" />
+          <span className="fw-bold text-info fs-4">Alpha AgriGear</span>
+        </NavLink>
 
-            {user && (
-              <div className="w-100 d-flex justify-content-between align-items-center greeting-container px-3">
-                {/* Left side: Logged in as */}
-                <div className="username-message animate-grow">
-                  Logged in as <strong>{user?.username}</strong>
-                </div>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-                {/* Right side: Greeting message */}
-                <div className="greeting-message animate-scroll">
-                  {greeting}, {user?.username}!
-                </div>
-              </div>
-            )}
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto align-items-center">
+            <li className="nav-item">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "nav-link active text-primary" : "nav-link"
+                }
+                to="/"
+              >
+                <i className="fas fa-home me-1"></i> Home
+              </NavLink>
+            </li>
 
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav ms-auto">
+            {!user ? (
+              <>
                 <li className="nav-item">
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive ? "nav-link active text-primary" : "nav-link"
-                    }
-                    to="/"
-                  >
-                    Home
+                  <NavLink className="nav-link" to="/signup">
+                    <i className="fas fa-user-plus me-1"></i> Signup
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/login">
+                    <i className="fas fa-sign-in-alt me-1"></i> Login
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item me-2">
+                  <NavLink className="btn btn-outline-success" to="/uploadFarmInput">
+                    <i className="fas fa-upload me-1"></i> Upload Product
                   </NavLink>
                 </li>
 
-                {!user ? (
-                  <>
-                    <li className="nav-item">
-                      <NavLink className="nav-link" to="/signup">
-                        Signup
-                      </NavLink>
-                    </li>
-                    <li className="nav-item">
-                      <NavLink className="nav-link" to="/login">
-                        Login
-                      </NavLink>
-                    </li>
-                  </>
-                ) : (
-                  <>
-                    <li className="nav-item">
-                      <NavLink className="nav-link text-center" to="/uploadFarmInput">
-                        <i className="fas fa-upload d-block"></i>
-                        <span className="fw-bold">Upload</span>
-                        <br />
-                        <span className="small">Product</span>
-                      </NavLink>
-                    </li>
-                    {user?.role === "admin" && (
-                      <li className="nav-item">
-                        <NavLink className="nav-link admin" to="/admin-dashboard">
-                          Admin Dashboard
-                        </NavLink>
-                      </li>
-                    )}
-                    <li className="nav-item dropdown">
-                      <button
-                        className="nav-link dropdown-toggle btn btn-link"
-                        id="userDropdown"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        Account
-                      </button>
-                      <ul className="dropdown-menu" aria-labelledby="userDropdown">
-                        <li>
-                          <NavLink className="dropdown-item" to="/updateprofile">
-                            Update Profile
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink className="dropdown-item" to="/resetpassword">
-                            Reset Password
-                          </NavLink>
-                        </li>
-                        <li>
-                          <button
-                            className="dropdown-item"
-                            onClick={() => {
-                              // Clear all user-related data
-                              localStorage.clear();
-                              sessionStorage.clear();
-
-                              // Navigate to the login page
-                              navigate("/login");
-
-                              // Optionally reload the page to ensure a clean state
-                              window.location.reload();
-                            }}
-                          >
-                            Logout
-                          </button>
-                        </li>
-                      </ul>
-                    </li>
-                  </>
+                {user?.role === "admin" && (
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/admin-dashboard">
+                      <i className="fas fa-tools me-1"></i> Admin
+                    </NavLink>
+                  </li>
                 )}
-              </ul>
-            </div>
-          </div>
-        </nav>
+
+                <li className="nav-item position-relative">
+                  <NavLink className="nav-link" to="/cart">
+                    <i className="fas fa-shopping-cart"></i>
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      3
+                    </span>
+                  </NavLink>
+                </li>
+
+                <li className="nav-item dropdown">
+                  <button
+                    className="nav-link dropdown-toggle d-flex align-items-center btn btn-link"
+                    id="userDropdown"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img
+                      src={user?.avatar || "/default-avatar.png"}
+                      alt="avatar"
+                      className="rounded-circle me-2"
+                      width="32"
+                      height="32"
+                    />
+                    <span className="fw-semibold">{user.username}</span>
+                  </button>
+                  <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li>
+                      <span className="dropdown-item-text text-muted">
+                        {greeting}, {user.username}!
+                      </span>
+                    </li>
+                    <li><hr className="dropdown-divider" /></li>
+                    <li>
+                      <NavLink className="dropdown-item" to="/updateprofile">
+                        Update Profile
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink className="dropdown-item" to="/resetpassword">
+                        Reset Password
+                      </NavLink>
+                    </li>
+                    <li>
+                      <button className="dropdown-item" onClick={handleLogout}>
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
       </div>
-    </section>
+    </nav>
   );
 };
 
